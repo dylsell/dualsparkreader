@@ -1,0 +1,121 @@
+FriendlyScroll Chrome Extension Project Notes
+==========================================
+Date: February 27, 2025
+Goal: Build a Chrome extension that turns AI chat responses (from Claude and ChatGPT) into a friendly scrolling feed with voice reading capability.
+
+What It Does:
+- Watches AI chat areas (both Claude and ChatGPT) for new text.
+- Breaks text into chunks (paragraphs, headings, code blocks, etc.).
+- Shows chunks in a book-like scrolling interface with elegant styling.
+- Provides voice reading capability using ElevenLabs text-to-speech.
+- Auto-scrolls text as it's being read aloud.
+
+Files Needed:
+1. manifest.json
+   - Sets up the extension for Chrome.
+   - Targets: https://claude.ai/chat/*, https://chat.openai.com/*, https://chatgpt.com/*
+   - Loads: content.js and styles.css
+   - Permissions: activeTab, storage
+   - Host permissions: https://api.elevenlabs.io/*
+
+2. content.js
+   - Watches the webpage for text updates on multiple platforms.
+   - Uses platform detection to apply appropriate selectors.
+   - Processes AI responses into different content types.
+   - Creates and manages the reader interface.
+   - Handles voice synthesis via ElevenLabs API.
+   - Manages auto-scrolling and text visibility.
+   - Contains hardcoded ElevenLabs API key.
+
+3. styles.css
+   - Styles the reader interface with book-like appearance.
+   - Provides styling for voice controls and settings modal.
+   - Handles text transitions and visibility effects.
+   - Fixed dimensions to prevent unwanted resizing.
+
+4. Icons (16px, 48px, 128px)
+   - Required for Chrome extension.
+
+How It Works:
+- Detects which platform (Claude or ChatGPT) it's running on.
+- Uses platform-specific selectors to find and extract content.
+- Uses MutationObserver to detect when AI responds.
+- Processes text into different types (paragraphs, headings, code).
+- Shows text in a scrollable feed with fade-in effect.
+- Connects to ElevenLabs API for high-quality voice synthesis.
+- Auto-scrolls text as it's being read aloud.
+
+Platform Support:
+- Claude.ai: Uses .font-claude-message selector to find responses.
+- ChatGPT: Uses [data-message-author-role="assistant"] to find responses.
+- Multiple fallback mechanisms for ChatGPT content extraction:
+  1. Direct .markdown container detection
+  2. Page-wide search for markdown containers
+  3. Content-rich div detection
+  4. Raw text extraction as final fallback
+
+Reader Interface Features:
+- Book-like styling with Garamond font and paper texture.
+- Fixed dimensions (650px width, 80% height) to prevent layout issues.
+- Parallax scrolling effect (text fades in as you scroll).
+- Draggable window that can be positioned anywhere on screen.
+- Toggle button (📖) to show/hide the reader.
+- Platform-agnostic "AI Reader" header instead of platform-specific terminology.
+- Voice button (🔊) in the header to start/stop reading.
+
+Voice Reader Features:
+- High-quality text-to-speech via ElevenLabs API.
+- Multiple voice options (Rachel, Adam, Domi, Elli, Josh).
+- Playback controls (play/pause, speed adjustment).
+- Voice selection dropdown to change voices during playback.
+- Progress bar showing reading progress.
+- Auto-scrolling synchronized with voice reading.
+- Current paragraph highlighting during reading.
+
+Settings Features:
+- Built-in ElevenLabs API key (no user input required).
+- Voice selection directly in the voice controls.
+- Voice preference stored in Chrome's storage API.
+
+Style Details:
+- Reader box: Fixed size (650px width, 80% height) with minimum dimensions to prevent shrinking.
+- Header: Orange header (#C96442), Arial font.
+- Text: Garamond font, varying sizes for different content types.
+- Parallax effect: Text starts faded (opacity 0.08) and becomes visible (opacity 1.0) as you scroll.
+- Transition timing: 1.0 second fade for smooth effect.
+- Scroll multiplier: 1.2 (controls how quickly text appears as you scroll).
+- Paragraphs shown ahead: +1 (how many paragraphs ahead to make visible).
+
+Implementation Notes:
+- ElevenLabs API key is hardcoded in the extension.
+- Users don't need to sign up for ElevenLabs or provide their own API key.
+- Text is sent to ElevenLabs in chunks (paragraphs, headings, etc.).
+- 5000 character limit per chunk to avoid API limits.
+- Platform detection is done at initialization to determine appropriate selectors.
+- Extensive debugging logs help diagnose issues with content extraction.
+- Multiple fallback mechanisms ensure content can be extracted even with DOM variations.
+- Be aware of ElevenLabs usage limits for the API key.
+
+Troubleshooting:
+- If the extension doesn't work on a specific site, check the console logs.
+- For ChatGPT, there may be DOM structure variations requiring selector adjustment.
+- If no text appears in the reader, try refreshing the page or extension.
+- The platform detection relies on URL matching, ensure correct URL patterns in manifest.json.
+- Check browser console for detailed logs on content extraction attempts.
+
+Future Improvements to Consider:
+- Theme options (light/dark mode, different fonts).
+- Save/export AI responses as text or audio files.
+- Keyboard shortcuts for controlling the reader.
+- More voice customization options.
+- Offline text-to-speech fallback when no internet connection.
+- Ability to highlight and copy text from the reader.
+- Support for additional AI platforms like Bard, Anthropic, etc.
+- User-configurable selectors for easier adaptation to DOM changes.
+
+Keep in Mind:
+- Extension needs to be reloaded after code changes.
+- Check console for errors if something isn't working.
+- Voice reading requires an active internet connection.
+- Monitor ElevenLabs usage to ensure the API key remains within limits.
+- AI platforms may update their DOM structure, requiring selector updates.
