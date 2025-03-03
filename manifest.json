@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "FriendlyScroll",
+  "version": "1.0",
+  "description": "Turns AI chat responses into a scrollable feed with voice reading capability",
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://claude.ai/chat/*",
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://chatgpt.com/c/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
+    },
+    "default_title": "FriendlyScroll"
+  },
+  
+  "web_accessible_resources": [{
+    "resources": ["icons/*.png"],
+    "matches": [
+      "https://claude.ai/*",
+      "https://chat.openai.com/*",
+      "https://chatgpt.com/*"
+    ]
+  }],
+  
+  "permissions": ["activeTab", "storage"],
+  
+  "host_permissions": [
+    "https://api.v7.unrealspeech.com/*"
+  ]
+} 
