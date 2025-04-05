@@ -1,1299 +1,242 @@
-/* FriendlyScroll - styles.css */
-/* This file contains all the styling for our scrolling feed with parallax effect */
-
-/* Font imports for a more premium look */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* The main container for our feed */
-#friendly-scroll-feed {
-  /* Position and size the feed container - now as a near full window takeover */
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 95%; /* Take up more viewport width */
-  height: 95%; /* Take up more viewport height */
-  max-width: 1400px; /* Increased width for more immersive experience */
-  max-height: 95vh; /* Increased height to use more of the screen */
-  
-  /* Style the feed container */
-  background-color: #fcfcfc; /* Lighter background color */
-  border-radius: 16px; /* More rounded corners for modern feel */
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-  
-  /* Make sure it appears on top of other elements */
-  z-index: 9999;
-  
-  /* Set up the layout */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  
-  /* Ensure the feed doesn't interfere with page interactions */
-  pointer-events: auto;
-  
-  /* Responsive minimum sizes */
-  min-width: 320px;
-  min-height: 400px;
-  
-  /* Apple-style transitions */
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  
-  /* Font styling for the entire container */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  animation: reader-fade-in 0.3s ease-out;
+/* Base styles */
+@font-face {
+  font-family: "Montserrat";
+  font-display: swap;
 }
 
-/* Toggle button styling - clean, minimal approach without background */
-#friendly-scroll-toggle {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%; /* Keep circular interaction area */
-  background-color: transparent; /* Remove white background */
-  border: none;
-  cursor: pointer;
-  z-index: 9998;
-  box-shadow: none; /* Remove shadow from button */
+body {
+  background-color: #f6f0ea;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-direction: column;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  min-height: 100vh;
   padding: 0;
-  animation: gentle-pulse 3s infinite alternate;
-}
-
-/* Display the image with maximum quality */
-#friendly-scroll-toggle img {
-  display: block;
-  width: 76px;
-  height: 76px;
-  object-fit: contain;
-  -webkit-image-rendering: -webkit-optimize-contrast;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  transform: translateZ(0); /* Forces hardware acceleration */
-  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15)); /* Add shadow to the icon itself instead of the container */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-}
-
-@keyframes gentle-pulse {
-  0% {
-    transform: scale(0.98);
-  }
-  100% {
-    transform: scale(1.02);
-  }
-}
-
-#friendly-scroll-toggle:hover {
-  transform: scale(1.1);
-}
-
-#friendly-scroll-toggle:active {
-  transform: scale(0.95);
-}
-
-#friendly-scroll-toggle:hover img {
-  filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.25)); /* Stronger shadow on hover */
-  transform: translateY(-2px); /* Slight lift effect */
-}
-
-#friendly-scroll-toggle:active img {
-  filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.15)); /* Reduced shadow when clicked */
-  transform: translateY(1px); /* Pressing down effect */
-}
-
-/* Tooltip styling */
-.friendly-scroll-tooltip {
-  position: absolute;
-  bottom: 90px; /* Reduced from 140px to position closer to the icon */
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s, transform 0.3s;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* Show tooltip on hover */
-#friendly-scroll-toggle:hover .friendly-scroll-tooltip {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Add a small arrow to the tooltip */
-.friendly-scroll-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  right: 48px; /* Adjusted for smaller button (was 72px) */
-  border-width: 6px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
-}
-
-/* API Key Modal */
-#api-key-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  color: #333;
-  font-size: 24px;
-}
-
-.modal-content p {
-  margin-bottom: 20px;
-  color: #555;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.modal-content a {
-  color: #4285F4;
-  text-decoration: none;
-}
-
-.modal-content a:hover {
-  text-decoration: underline;
-}
-
-#api-key-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.voice-selection {
-  margin-bottom: 20px;
-}
-
-.voice-selection label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #333;
-}
-
-#voice-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  background-color: white;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.modal-buttons button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-#save-api-key {
-  background-color: #4285F4;
-  color: white;
-}
-
-#save-api-key:hover {
-  background-color: #3367D6;
-}
-
-#cancel-api-key {
-  background-color: #f1f1f1;
-  color: #333;
-}
-
-#cancel-api-key:hover {
-  background-color: #e0e0e0;
-}
-
-/* Voice Controls */
-#voice-controls {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid #e0e0e0;
-  padding: 15px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  animation: voice-controls-slide-in 0.3s ease-out;
   position: relative;
-  z-index: 10;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-radius: 6px;
 }
 
-/* Animation for voice controls */
-@keyframes voice-controls-slide-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Add a label to clearly indicate voice controls */
-#voice-controls::before {
-  content: "";
-  display: none;
-}
-
-.voice-control-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.voice-control-buttons button {
-  background-color: #f0e8dd;
-  border: 1px solid #d8cebf;
-  border-radius: 6px;
-  color: #c96442;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 8px 12px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  height: 40px;
-}
-
-.voice-control-buttons button:hover {
-  background-color: #e6dfd3;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.voice-control-buttons button:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-.voice-speed-control {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border: 1px solid #d8cebf;
-  border-radius: 20px;
-  padding: 8px 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.voice-speed-control label {
-  margin-right: 10px;
-  color: #C96442;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.voice-speed-control button {
-  background: none;
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 0;
-  margin: 0 5px;
-  color: #C96442;
-  transition: all 0.2s ease;
-}
-
-.voice-speed-control button:hover {
-  background-color: rgba(201, 100, 66, 0.1);
-}
-
-#voice-speed-value {
-  font-size: 14px;
-  color: #333;
-  font-weight: 600;
-  width: 40px;
-  text-align: center;
-}
-
-.voice-selection-control {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border: 1px solid #d8cebf;
-  border-radius: 20px;
-  padding: 8px 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.voice-selection-control label {
-  margin-right: 10px;
-  color: #C96442;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.voice-selection-control select {
-  background-color: #fff;
-  border: 1px solid #d8cebf;
-  border-radius: 15px;
-  color: #333;
-  font-size: 14px;
-  padding: 6px 12px;
-  cursor: pointer;
-  min-width: 150px;
-  outline: none;
-}
-
-.voice-selection-control select:focus {
-  border-color: #C96442;
-  box-shadow: 0 0 0 2px rgba(201, 100, 66, 0.2);
-}
-
-/* Styling for the stop hint */
-/* .stop-hint {
-  font-size: 12px;
-  color: #777;
-  font-style: italic;
-  margin-left: 10px;
-  background-color: #f0e8dd;
-  border: 1px solid #d8cebf;
-  border-radius: 6px;
-  padding: 4px 10px;
-} */
-
-.voice-progress {
-  height: 6px;
-  background-color: #e0d8c9;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-top: 5px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-#voice-progress-bar {
-  height: 100%;
-  width: 0;
-  background-color: #c96442;
-  background-image: linear-gradient(90deg, #c96442, #e07d5d);
-  transition: width 0.3s;
-  box-shadow: 0 0 5px rgba(201, 100, 66, 0.5);
-}
-
-/* Currently reading paragraph */
-.text-paragraph.reading,
-.text-heading.reading,
-.text-code.reading {
-  background-color: rgba(201, 100, 66, 0.15); 
-  border-left: 4px solid #c96442;
-  padding-left: 16px;
-  margin-left: -20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(201, 100, 66, 0.2);
-  color: #333 !important; /* Ensure text color is dark */
-  opacity: 1 !important; /* Ensure opacity is fully visible */
-  transform: translateY(0) !important; /* Ensure no transform offset */
-  font-weight: 500; /* Slightly bolder font */
-}
-
-/* The header for our reader - more Apple-like */
-#friendly-scroll-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px; /* Reduced padding for more compact header */
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06); /* Lighter border */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03); /* Subtle shadow */
-  user-select: none;
+/* Logo */
+.logo {
+  filter: invert(30%) sepia(30%) saturate(1000%) hue-rotate(350deg)
+    brightness(50%) contrast(100%);
+  left: 50%;
+  position: absolute;
+  top: 2rem;
+  transform: translateX(-50%);
+  width: 70px;
   z-index: 1;
 }
 
-#friendly-scroll-header-content {
-  font-size: 20px; /* Slightly smaller */
-  font-weight: 600;
-  color: #333;
-  letter-spacing: -0.02em; /* Tighter letter spacing for modern look */
-  flex: 1;
-}
-
-#font-size-controls {
+/* Content area */
+.content {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 20px;
-  user-select: none;
   flex: 1;
+  flex-direction: column;
   justify-content: center;
+  margin: auto;
+  margin-top: 6rem;
+  max-width: 500px;
+  padding: 2rem;
+  text-align: center;
+  width: 90%;
+  z-index: 1;
 }
 
-#friendly-scroll-header-buttons {
-  display: flex;
-  gap: 12px;
-  flex: 1;
-  justify-content: flex-end;
+#title {
+  animation: fadeInLeft 0.8s ease-out 0.2s forwards;
+  max-width: 100%;
+  opacity: 0;
+  padding: 0 1rem;
+  transform: translateX(20px);
+  white-space: normal;
+  word-wrap: break-word;
 }
 
-#friendly-scroll-voice,
-#friendly-scroll-close {
-  background: none;
+.subtitle {
+  animation: fadeInRight 0.8s ease-out 0.5s forwards;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.install-btn {
+  animation: fadeUp 0.8s ease-out 0.8s forwards;
+  background-color: #8b4513;
   border: none;
+  border-radius: 50px;
+  color: #fbf5ee;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  color: #555;
-  background-color: transparent;
-}
-
-/* Enhanced voice button styling */
-#friendly-scroll-voice {
-  background-color: rgba(201, 100, 66, 0.08);
-  border: 1px solid rgba(201, 100, 66, 0.2);
-  border-radius: 24px;
-  font-size: 15px;
-  padding: 6px 16px;
-  font-weight: 500;
-  color: #C96442;
-  height: 34px;
-  transition: all 0.2s ease;
-}
-
-#friendly-scroll-voice:hover {
-  background-color: rgba(201, 100, 66, 0.12);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 5px rgba(201, 100, 66, 0.1);
-}
-
-#friendly-scroll-close {
-  font-size: 22px; /* Slightly smaller */
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  opacity: 0.7; /* Less prominent */
-  color: #666;
-}
-
-#friendly-scroll-close:hover {
-  background-color: rgba(0, 0, 0, 0.06);
-  opacity: 1;
-}
-
-#friendly-scroll-voice.active {
-  color: white;
-  background-color: #C96442;
-}
-
-/* The content area where text appears */
-#friendly-scroll-content {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0 40px;
-  position: relative;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  scroll-behavior: smooth; /* Smooth scrolling */
-  background: linear-gradient(to bottom, rgba(252, 252, 252, 0.5) 0%, rgba(255, 255, 255, 1) 100%);
-  border-radius: 0 0 16px 16px;
-}
-
-/* Custom scrollbar styling */
-#friendly-scroll-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-#friendly-scroll-content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 4px;
-}
-
-#friendly-scroll-content::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0;
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  transform: translateY(20px);
   transition: all 0.3s ease;
 }
 
-#friendly-scroll-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.2);
+.install-btn:hover {
+  background-color: #6b4f45;
 }
 
-/* The container for all text content */
-#friendly-scroll-text {
-  padding: 40px 0;
-  max-width: 900px; /* Increased for more immersive text */
-  margin: 0 auto;
-  /* Add some padding at the bottom for scrolling */
-  padding-bottom: 250px;
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Paragraph styling with new reveal effect */
-.text-paragraph {
-  /* Style each paragraph */
-  opacity: 0.15; /* Start more faded (reduced from 0.25) */
-  transform: translateY(30px); /* Start moved down more for slower reveal effect */
-  transition: opacity 1.8s ease-out, transform 1.8s ease-out, color 2.2s ease-out; /* Even slower transition */
-  font-size: 2.5rem; /* Dramatically larger font size for immersion */
-  line-height: 1.5;
-  letter-spacing: 0.01em;
-  text-rendering: optimizeLegibility;
-  margin-bottom: 1.6em;
-  color: #cccccc; /* Lighter gray text (changed from #aaa) */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Typography */
+h1 {
+  color: #2c1810;
+  font-size: 2.5rem;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+p {
+  color: #4a3830;
+  font-size: 1.1rem;
   font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
-/* Empty paragraphs (used for spacing) should not have indentation */
-.text-paragraph:empty {
-  text-indent: 0;
-  margin: 0;
-  padding: 0;
-  height: 20px; /* Small height for spacing */
+.feature {
+  color: #8b4513;
+  font-weight: 500;
 }
 
-/* Code block styling with new reveal effect */
-.text-code {
-  /* Style code blocks */
-  opacity: 0.15; /* Start more faded (reduced from 0.25) */
-  transform: translateY(30px); /* Start moved down more for slower reveal */
-  transition: opacity 1.8s ease-out, transform 1.8s ease-out, color 2.2s ease-out; /* Even slower transition */
-  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
-  font-size: 1.8rem; /* Much larger font size for immersion */
-  background-color: rgba(0, 0, 0, 0.02);
-  padding: 25px;
-  border-radius: 12px;
-  border-left: 4px solid rgba(201, 100, 66, 0.3);
-  overflow-x: auto;
-  white-space: pre-wrap;
-  line-height: 1.5;
-  color: #cccccc; /* Lighter gray text (changed from #aaa) */
-  margin-bottom: 1.8em;
+.compatibility {
+  color: #6b4f45;
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  margin-top: -1rem;
 }
 
-/* Heading styling with new reveal effect */
-.text-heading {
-  /* Style headings differently */
-  opacity: 0.15; /* Start more faded (reduced from 0.25) */
-  transform: translateY(30px); /* Start moved down more for slower reveal */
-  transition: opacity 1.8s ease-out, transform 1.8s ease-out, color 2.2s ease-out; /* Even slower transition */
-  font-size: 3.2rem; /* Much larger heading size */
-  font-weight: 700;
-  margin-top: 1.5em;
-  margin-bottom: 0.8em;
-  color: #cccccc; /* Lighter gray text (changed from #aaa) */
-}
-
-/* Visible paragraphs, headings, and code blocks */
-.text-paragraph.visible,
-.text-heading.visible,
-.text-code.visible {
-  opacity: 1;
-  transform: translateY(0);
-  color: #333; /* Full dark color when visible */
-}
-
-/* Almost visible paragraphs - for smoother transition */
-.text-paragraph.almost-visible,
-.text-heading.almost-visible,
-.text-code.almost-visible {
-  opacity: 0.8; /* Higher opacity but not fully visible */
-  transform: translateY(5px); /* Small offset remains */
-  color: #555555; /* Darker grey but not fully black */
-}
-
-/* Partially visible paragraphs - for smooth transition effect */
-.text-paragraph.partial-visible,
-.text-heading.partial-visible,
-.text-code.partial-visible {
-  opacity: 0.5; /* Medium visibility */
-  transform: translateY(15px); /* More offset */
-  color: #888888; /* Medium gray */
-}
-
-/* Barely visible paragraphs - new class for more gradual appearance */
-.text-paragraph.barely-visible,
-.text-heading.barely-visible,
-.text-code.barely-visible {
-  opacity: 0.25; /* Just becoming visible */
-  transform: translateY(25px); /* Still mostly offset */
-  color: #aaaaaa; /* Light gray */
-}
-
-/* Code blocks when visible */
-.text-code.visible {
-  opacity: 1;
-  transform: translateY(0);
-  color: #222; /* Slightly darker for code to improve contrast */
-}
-
-/* Scroll indicator - more subtle and elegant */
-#scroll-indicator {
-  position: fixed;
-  bottom: 80px; /* Position further down from the top of the feed container */
-  left: 50%;
-  transform: translateX(-50%);
+/* Footer */
+footer {
+  color: #6b4f45;
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin-top: auto;
+  opacity: 0;
+  padding: 2rem;
   text-align: center;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 12px; /* Smaller text */
-  font-weight: 500; /* Slightly bolder */
-  letter-spacing: 0.05em;
-  opacity: 0.7;
-  transition: opacity 0.5s ease;
-  animation: pulse 2s infinite;
-  pointer-events: none;
-  text-transform: uppercase; /* More elegant look */
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-  padding: 8px 16px;
-  border-radius: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 10; /* Ensure it's above other content */
+  animation: fadeIn 0.8s ease-out 1s forwards;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.6; transform: translateY(0); }
-  50% { opacity: 0.9; transform: translateY(5px); }
-  100% { opacity: 0.6; transform: translateY(0); }
-}
-
-/* Add responsive adjustments */
-@media (max-width: 1200px) {
-  #friendly-scroll-feed {
-    width: 95%;
-    height: 95%;
-  }
-  
-  #friendly-scroll-content {
-    padding: 0 35px;
-  }
-  
-  .text-paragraph {
-    font-size: 2.2rem;
-  }
-  
-  .text-heading {
-    font-size: 3rem;
-  }
-  
-  .text-code {
-    font-size: 1.6rem;
-  }
-}
-
-@media (max-width: 768px) {
-  #friendly-scroll-feed {
-    width: 98%;
-    height: 98%;
-  }
-  
-  #friendly-scroll-content {
-    padding: 0 25px;
-  }
-  
-  .text-paragraph {
-    font-size: 2rem;
-    line-height: 1.5;
-  }
-  
-  .text-heading {
-    font-size: 2.6rem;
-  }
-  
-  .text-code {
-    font-size: 1.4rem;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  #friendly-scroll-feed {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-  }
-  
-  #friendly-scroll-content {
-    padding: 0 20px;
-  }
-  
-  .text-paragraph {
-    font-size: 1.8rem;
-    line-height: 1.4;
-  }
-  
-  .text-heading {
-    font-size: 2.4rem;
-  }
-  
-  .text-code {
-    font-size: 1.3rem;
-  }
-  
-  #friendly-scroll-text {
-    padding: 30px 0;
-  }
-}
-
-/* Poetry specific styling */
-.text-paragraph.poetry-line {
-  margin-bottom: 0.7em; /* Tighter spacing between poem lines */
-  line-height: 1.4;
-}
-
-/* For poetry stanzas */
-.text-paragraph.poetry-stanza-break {
-  margin-bottom: 2em; /* More space between stanzas */
-}
-
-/* Add a subtle fade-in for the entire reader when it opens */
-@keyframes reader-fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-#friendly-scroll-feed {
-  animation: reader-fade-in 0.3s ease-out;
-}
-
-/* Font size controls styling */
-.font-size-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  transition: all 0.2s ease;
-  color: #555;
-  padding: 5px 10px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 30px;
-}
-
-#decrease-font-size {
-  font-size: 16px;
-}
-
-#increase-font-size {
-  font-size: 28px; /* Increased from 24px to better represent the larger max size */
-  font-weight: 600;
-}
-
-.font-size-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #333;
-}
-
-.font-size-button:active {
-  transform: scale(0.95);
-}
-
-.font-size-button.disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.font-size-button.disabled:hover {
-  background-color: transparent;
-  transform: none;
-}
-
-#font-size-indicator {
-  width: 80px; /* Increased from 60px to provide more space for the indicator */
-  height: 2px;
-  background-color: #ddd;
-  position: relative;
-  --indicator-width: 50%; /* Default width */
-  --indicator-color: #555; /* Default color */
-}
-
-#font-size-indicator::before {
-  content: '';
-  position: absolute;
-  height: 100%;
-  background-color: var(--indicator-color);
-  left: 0;
-  width: var(--indicator-width); /* Use the CSS variable */
-  transition: width 0.2s ease, background-color 0.3s ease;
-}
-
-/* Font size classes for the content */
-#friendly-scroll-text.font-size-1 .text-paragraph {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-#friendly-scroll-text.font-size-2 .text-paragraph {
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-#friendly-scroll-text.font-size-3 .text-paragraph {
-  font-size: 20px;
-  line-height: 1.6;
-}
-
-#friendly-scroll-text.font-size-4 .text-paragraph {
-  font-size: 22px;
-  line-height: 1.7;
-}
-
-#friendly-scroll-text.font-size-5 .text-paragraph {
-  font-size: 24px;
-  line-height: 1.7;
-}
-
-/* Additional larger font sizes (up to 2x the previous max) */
-#friendly-scroll-text.font-size-6 .text-paragraph {
-  font-size: 28px;
-  line-height: 1.7;
-}
-
-#friendly-scroll-text.font-size-7 .text-paragraph {
-  font-size: 32px;
-  line-height: 1.8;
-}
-
-#friendly-scroll-text.font-size-8 .text-paragraph {
-  font-size: 36px;
-  line-height: 1.8;
-}
-
-#friendly-scroll-text.font-size-9 .text-paragraph {
-  font-size: 42px;
-  line-height: 1.9;
-}
-
-#friendly-scroll-text.font-size-10 .text-paragraph {
-  font-size: 48px; /* 2x the size of level 5 (24px) */
-  line-height: 1.9;
-}
-
-/* Adjust heading sizes proportionally */
-#friendly-scroll-text.font-size-1 .text-heading {
-  font-size: 20px;
-}
-
-#friendly-scroll-text.font-size-2 .text-heading {
-  font-size: 22px;
-}
-
-#friendly-scroll-text.font-size-3 .text-heading {
-  font-size: 24px;
-}
-
-#friendly-scroll-text.font-size-4 .text-heading {
-  font-size: 26px;
-}
-
-#friendly-scroll-text.font-size-5 .text-heading {
-  font-size: 28px;
-}
-
-/* Additional larger heading sizes */
-#friendly-scroll-text.font-size-6 .text-heading {
-  font-size: 32px;
-}
-
-#friendly-scroll-text.font-size-7 .text-heading {
-  font-size: 36px;
-}
-
-#friendly-scroll-text.font-size-8 .text-heading {
-  font-size: 40px;
-}
-
-#friendly-scroll-text.font-size-9 .text-heading {
-  font-size: 46px;
-}
-
-#friendly-scroll-text.font-size-10 .text-heading {
-  font-size: 56px; /* 2x the size of level 5 (28px) */
-}
-
-/* Adjust code block sizes */
-#friendly-scroll-text.font-size-1 .text-code {
-  font-size: 14px;
-}
-
-#friendly-scroll-text.font-size-2 .text-code {
-  font-size: 16px;
-}
-
-#friendly-scroll-text.font-size-3 .text-code {
-  font-size: 18px;
-}
-
-#friendly-scroll-text.font-size-4 .text-code {
-  font-size: 20px;
-}
-
-#friendly-scroll-text.font-size-5 .text-code {
-  font-size: 22px;
-}
-
-/* Additional larger code block sizes */
-#friendly-scroll-text.font-size-6 .text-code {
-  font-size: 26px;
-}
-
-#friendly-scroll-text.font-size-7 .text-code {
-  font-size: 30px;
-}
-
-#friendly-scroll-text.font-size-8 .text-code {
-  font-size: 34px;
-}
-
-#friendly-scroll-text.font-size-9 .text-code {
-  font-size: 38px;
-}
-
-#friendly-scroll-text.font-size-10 .text-code {
-  font-size: 44px; /* 2x the size of level 5 (22px) */
-}
-
-/* Dark mode styles - refined for better visual appearance */
-#friendly-scroll-feed.dark-mode {
-  background: linear-gradient(135deg, #0a0a0a, #121212);
-  background-color: #0a0a0a !important; /* Force dark background */
-  color: #f5f5f5;
-  border-color: #2a2a2a;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-}
-
-/* Main text wrapper background */
-#friendly-scroll-feed.dark-mode #friendly-scroll-text {
-  background-color: transparent;
-}
-
-/* Ensure all paragraphs and text elements in dark mode have proper styling */
-#friendly-scroll-feed.dark-mode .text-paragraph,
-#friendly-scroll-feed.dark-mode .text-heading,
-#friendly-scroll-feed.dark-mode .text-code,
-#friendly-scroll-feed.dark-mode p,
-#friendly-scroll-feed.dark-mode h1,
-#friendly-scroll-feed.dark-mode h2,
-#friendly-scroll-feed.dark-mode h3,
-#friendly-scroll-feed.dark-mode h4,
-#friendly-scroll-feed.dark-mode h5,
-#friendly-scroll-feed.dark-mode h6 {
-  color: #ffffff;
-  background-color: transparent;
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-header {
-  background-color: #0f0f0f; /* Darker header */
-  border-bottom: 1px solid #333;
-  color: #ffffff;
-  padding: 12px 20px; /* More padding for better visibility */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow for separation */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-content {
-  background-color: transparent; /* Use parent's dark gradient */
-  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.98) 0%, rgba(15, 15, 15, 1) 100%) !important; /* Dark gradient override */
-  color: #f5f5f5;
-  padding: 20px 30px;
-}
-
-#friendly-scroll-feed.dark-mode .text-paragraph,
-#friendly-scroll-feed.dark-mode .text-heading {
-  color: #ffffff; /* Pure white for maximum contrast */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Slight shadow for better readability */
-}
-
-#friendly-scroll-feed.dark-mode .text-heading {
-  color: #ffffff; /* Pure white for headings to stand out */
-}
-
-#friendly-scroll-feed.dark-mode .text-code {
-  background-color: #262626; /* Darker background for code blocks */
-  border: 1px solid #3a3a3a; /* More visible border for code */
-  color: #e0e0e0; /* Slightly dimmer than regular text */
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace; /* Better code font */
-  border-radius: 4px; /* Rounded corners */
-  padding: 1em; /* More padding inside code blocks */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-voice,
-#friendly-scroll-feed.dark-mode #friendly-scroll-close,
-#friendly-scroll-feed.dark-mode .font-size-button {
-  background-color: #2d2d2d; /* Darker button background */
-  color: #ffffff; /* White text on buttons */
-  border: 1px solid #444; /* Medium gray border */
-  border-radius: 4px; /* Rounded button corners */
-  transition: all 0.2s ease; /* Smooth hover transitions */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-voice:hover,
-#friendly-scroll-feed.dark-mode #friendly-scroll-close:hover,
-#friendly-scroll-feed.dark-mode .font-size-button:hover {
-  background-color: #353535; /* Highlight on hover */
-  color: #ffffff;
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-voice:active,
-#friendly-scroll-feed.dark-mode #friendly-scroll-close:active,
-#friendly-scroll-feed.dark-mode .font-size-button:active {
-  background-color: #222; /* Darker when pressed */
-  transform: scale(0.98); /* Slight press effect */
-}
-
-#friendly-scroll-feed.dark-mode #voice-controls {
-  background-color: #1a1a1a; /* Match header background */
-  border: 1px solid #333; /* Match header border */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Nice shadow for depth */
-  border-radius: 6px; /* Rounded corners */
-  color: #f5f5f5; /* Consistent text color */
-}
-
-#friendly-scroll-feed.dark-mode .voice-selection-control select,
-#friendly-scroll-feed.dark-mode #voice-speed-value {
-  background-color: #2d2d2d; /* Darker form control background */
-  color: #f5f5f5; /* Matching text color */
-  border: 1px solid #444; /* Visible border */
-  border-radius: 4px; /* Rounded corners */
-  padding: 4px 8px; /* More padding for better appearance */
-}
-
-#friendly-scroll-feed.dark-mode .voice-selection-control select:focus {
-  border-color: #666; /* Lighter border when focused */
-  outline: none; /* Remove default focus outline */
-  box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.5); /* Custom focus effect */
-}
-
-#friendly-scroll-feed.dark-mode .voice-progress {
-  background-color: #2d2d2d; /* Match other form elements */
-  border-radius: 4px; /* Rounded corners */
-}
-
-#friendly-scroll-feed.dark-mode #voice-progress-bar {
-  background-color: #4d88ff; /* Brighter blue for progress */
-  border-radius: 4px; /* Rounded corners */
-}
-
-/* Scrollbar styling for dark mode */
-#friendly-scroll-feed.dark-mode #friendly-scroll-content::-webkit-scrollbar {
-  width: 10px; /* Slightly narrower scrollbar */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-content::-webkit-scrollbar-track {
-  background-color: #1a1a1a; /* Match header/control backgrounds */
-  border-radius: 0; /* Square track */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-content::-webkit-scrollbar-thumb {
-  background-color: #444; /* Darker thumb for contrast */
-  border-radius: 5px; /* Rounded thumb */
-  border: 2px solid #1a1a1a; /* Create space around thumb */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-content::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Lighter on hover */
-}
-
-/* Improve the visibility of the "SCROLL TO CONTINUE" indicator */
-#friendly-scroll-feed.dark-mode #scroll-indicator {
-  background-color: rgba(30, 30, 30, 0.8); /* Darker background */
-  color: #ffffff; /* Brighter text */
-  border: 1px solid #444;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow */
-}
-
-/* Additional dark mode text enhancements */
-#friendly-scroll-feed.dark-mode .text-paragraph {
-  line-height: 1.7; /* Increased line height for better readability */
-  margin-bottom: 1.2em; /* More spacing between paragraphs */
-  font-weight: 400; /* Slightly lighter font weight */
-  letter-spacing: 0.01em; /* Very slight letter spacing for readability */
-  text-rendering: optimizeLegibility; /* Improves text rendering */
-  -webkit-font-smoothing: antialiased; /* Smoother text on WebKit browsers */
-  -moz-osx-font-smoothing: grayscale; /* Smoother text on MacOS */
-}
-
-/* Style adjustments for different text types in dark mode */
-#friendly-scroll-feed.dark-mode .text-paragraph.poetry-line {
-  color: #e6e6e6;
-  font-style: italic;
-  padding-left: 2em;
-  border-left: 3px solid #444;
-  margin-bottom: 0.4em;
-}
-
-#friendly-scroll-feed.dark-mode .text-paragraph.poetry-stanza-break {
-  height: 1.5em;
-}
-
-/* Make links stand out in dark mode */
-#friendly-scroll-feed.dark-mode a {
-  color: #79b8ff; /* Brighter blue for links */
+footer a {
+  color: #8b4513;
   text-decoration: none;
-  border-bottom: 1px dotted #79b8ff; /* Subtle underline */
-  transition: all 0.2s ease;
+  transition: color 0.3s ease;
 }
 
-#friendly-scroll-feed.dark-mode a:hover {
-  color: #a2d0ff; /* Lighter on hover */
-  border-bottom: 1px solid #a2d0ff; /* Solid underline on hover */
+footer a:hover {
+  color: #6b4f45;
 }
 
-/* Improve list appearance in dark mode */
-#friendly-scroll-feed.dark-mode ul,
-#friendly-scroll-feed.dark-mode ol {
-  padding-left: 1.8em;
-  margin: 1em 0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-#friendly-scroll-feed.dark-mode li {
-  margin-bottom: 0.5em;
-  padding-left: 0.3em;
+/* Privacy page specific styles */
+.privacy-content {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 2rem;
+  text-align: left;
 }
 
-/* Enhance blockquotes in dark mode */
-#friendly-scroll-feed.dark-mode blockquote {
-  border-left: 3px solid #444;
-  padding-left: 1em;
-  margin-left: 0;
+.privacy-content h1 {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.privacy-content h2 {
+  border-bottom: 1px solid rgba(44, 24, 16, 0.2);
+  color: #2c1810;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.privacy-content h3 {
+  color: #4a3830;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
+
+.privacy-content p,
+.privacy-content ul,
+.privacy-content li {
+  color: #4a3830;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.privacy-content ul {
+  padding-left: 1.5rem;
+}
+
+.privacy-content li {
+  margin-bottom: 0.5rem;
+}
+
+.last-updated {
+  color: #6b4f45;
   font-style: italic;
-  color: #cccccc;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-/* Add subtle animation for transition to dark mode */
-#friendly-scroll-feed {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+.back-link {
+  color: #8b4513;
+  display: inline-block;
+  font-weight: 500;
+  margin-top: 2rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-/* Enhanced font-size controls for dark mode */
-#friendly-scroll-feed.dark-mode #font-size-controls {
-  background-color: #151515; /* Darker background */
-  border: 1px solid #333;
-  border-radius: 6px; /* Slightly more rounded */
-  padding: 6px 10px; /* More padding */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+.back-link:hover {
+  color: #6b4f45;
 }
-
-#friendly-scroll-feed.dark-mode .font-size-button {
-  color: #ffffff; /* Brighter text for better visibility */
-  transition: all 0.2s ease;
-  padding: 4px 8px; /* Add padding for easier targeting */
-  border-radius: 4px; /* Slight rounding */
-  background-color: #252525; /* Visible button background */
-}
-
-#friendly-scroll-feed.dark-mode #font-size-indicator {
-  color: #ffffff; /* Brighter text */
-  background-color: #252525; /* Darker background */
-  border: 1px solid #444;
-  font-weight: 600; /* Bolder for better visibility */
-  padding: 4px 8px; /* More padding */
-}
-
-#friendly-scroll-feed.dark-mode #font-size-indicator::before {
-  color: #888;
-}
-
-#friendly-scroll-feed.dark-mode .font-size-button.disabled {
-  background-color: #252525;
-  color: #666;
-  border-color: #333;
-  cursor: not-allowed;
-}
-
-/* Header overall refinements for dark mode */
-#friendly-scroll-feed.dark-mode #friendly-scroll-header {
-  padding: 12px 20px; /* More breathing room */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-header-content {
-  font-weight: 500; /* Slightly bolder title */
-  letter-spacing: 0.5px; /* Subtle letter spacing for title */
-}
-
-/* Close button refinements */
-#friendly-scroll-feed.dark-mode #friendly-scroll-close {
-  color: #ffffff; /* Brighter color */
-  background-color: #252525; /* Visible background */
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-weight: 600; /* Bolder */
-  font-size: 16px; /* Slightly larger */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-close:hover {
-  background-color: #454545; /* Highlight on hover */
-}
-
-/* Voice button refinements */
-#friendly-scroll-feed.dark-mode #friendly-scroll-voice {
-  padding: 6px 12px;
-  font-weight: 600; /* Bolder */
-  border-radius: 4px;
-  background-color: #252525; /* Visible background */
-  color: #ffffff; /* Brighter text */
-  border: 1px solid #444;
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-voice:hover {
-  background-color: #353535; /* Highlight on hover */
-}
-
-#friendly-scroll-feed.dark-mode #friendly-scroll-voice.active {
-  background-color: #3a3a3a;
-  color: #ffffff;
-  border-color: #555;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Inset shadow for pressed effect */
-} 

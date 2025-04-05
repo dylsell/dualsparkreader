@@ -1,194 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - DualSpark Reader</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            color: #cccccc;
-            position: relative;
-            overflow-x: hidden;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - DualSpark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="icons/favicon.png" />
+  </head>
+  <body>
+    <div class="privacy-content">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last Updated: March 2024</p>
 
-        .background-icon {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-image: url('icons/icon-white.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            opacity: 0.08;
-            z-index: -1;
-        }
+      <h2>Introduction</h2>
+      <p>
+        DualSpark is committed to protecting your privacy. This Privacy Policy
+        explains how we collect, use, and safeguard your information when you
+        use our browser extension.
+      </p>
 
-        .content {
-            margin: 0 auto;
-            max-width: 800px;
-            padding: 2rem;
-            z-index: 1;
-            position: relative;
-        }
+      <h2>Information Collection</h2>
+      <p>
+        We do not collect any personal information through our extension. The
+        extension operates entirely locally on your device and does not transmit
+        any data to external servers.
+      </p>
 
-        h1, h2 {
-            color: #ffffff;
-        }
+      <h3>Local Storage</h3>
+      <ul>
+        <li>
+          The extension stores your reading preferences locally on your device
+        </li>
+        <li>No reading history or personal data is collected or stored</li>
+        <li>All settings remain private and local to your browser</li>
+      </ul>
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+      <h2>Data Usage</h2>
+      <p>
+        Since we don't collect any data, there is no usage or sharing of your
+        information. The extension functions purely as a local tool to enhance
+        your reading experience.
+      </p>
 
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
-        }
+      <h2>Updates to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. We will notify you
+        of any changes by posting the new Privacy Policy on this page.
+      </p>
 
-        p, ul, li {
-            line-height: 1.6;
-        }
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions about this Privacy Policy, please contact us
+        at privacy@dualspark.app
+      </p>
 
-        ul {
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            color: #666666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: #ffffff;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666666;
-            font-size: 0.8rem;
-        }
-
-        .last-updated {
-            font-style: italic;
-            color: #666666;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="background-icon"></div>
-    
-    <div class="content">
-        <h1>Privacy Policy for DualSpark Chrome Extension</h1>
-        <p class="last-updated">Last Updated: March 2, 2025</p>
-
-        <h2>Introduction</h2>
-        <p>Thank you for choosing DualSpark ("we", "our", or "the extension"). This Privacy Policy is designed to help you understand what information we collect, how we use it, and what choices you have regarding your information when you use our Chrome extension.</p>
-
-        <h2>Information We Collect</h2>
-
-        <h3>User Preferences</h3>
-        <p>DualSpark collects and stores the following preference information:</p>
-        <ul>
-            <li>Your selected voice for the text-to-speech feature</li>
-            <li>Your preferred font size for the reading interface</li>
-        </ul>
-        <p>This information is stored locally in your browser using Chrome's storage API and is not transmitted to our servers.</p>
-
-        <h3>Content Data</h3>
-        <p>When you use the voice reading feature:</p>
-        <ul>
-            <li>The text from AI responses (from Claude.ai or ChatGPT) is sent to the Unreal Speech API for text-to-speech conversion</li>
-            <li>This text is limited to 1000 characters per request</li>
-            <li>We do not store or retain this text after it has been converted to speech</li>
-        </ul>
-
-        <h3>Technical Information</h3>
-        <p>Our extension does not collect:</p>
-        <ul>
-            <li>Personal identification information</li>
-            <li>Browsing history</li>
-            <li>Cookies or tracking data</li>
-            <li>Any information from websites other than Claude.ai and ChatGPT</li>
-        </ul>
-
-        <h2>How We Use Information</h2>
-
-        <h3>User Preferences</h3>
-        <ul>
-            <li>To remember your voice and font size settings between browsing sessions</li>
-            <li>To provide a consistent and personalized experience</li>
-        </ul>
-
-        <h3>Content Data</h3>
-        <ul>
-            <li>Text from AI responses is only used to generate speech through the Unreal Speech API</li>
-            <li>This data is not used for any other purpose and is not stored after processing</li>
-        </ul>
-
-        <h2>Third-Party Services</h2>
-
-        <h3>Unreal Speech API</h3>
-        <ul>
-            <li>We use the Unreal Speech API (https://unrealspeech.com) to convert text to speech</li>
-            <li>When you use the voice reading feature, the text is sent to this third-party service</li>
-            <li>Please refer to Unreal Speech's privacy policy for information on how they process data</li>
-        </ul>
-
-        <h2>Data Sharing and Disclosure</h2>
-        <p>We do not share, sell, rent, or trade any information with third parties for their commercial purposes. The only data that leaves your browser is:</p>
-        <ul>
-            <li>Text sent to the Unreal Speech API for text-to-speech conversion</li>
-        </ul>
-
-        <h2>Data Security</h2>
-        <p>We implement reasonable precautions to protect the security of your preferences:</p>
-        <ul>
-            <li>User preferences are stored securely using Chrome's built-in storage API</li>
-            <li>We do not maintain any servers that store your data</li>
-        </ul>
-
-        <h2>Your Rights and Choices</h2>
-        <p>You have the right to:</p>
-        <ul>
-            <li>Disable or uninstall the extension at any time</li>
-            <li>Clear your Chrome browser data, which will remove any stored preferences</li>
-        </ul>
-
-        <h2>Children's Privacy</h2>
-        <p>Our extension is not directed to children under the age of 13, and we do not knowingly collect personal information from children under 13.</p>
-
-        <h2>Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on the Chrome Web Store and updating the "Last Updated" date.</p>
-
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at: dylansellberg@gmail.com</p>
-
-        <h2>Consent</h2>
-        <p>By using DualSpark, you consent to our Privacy Policy and agree to its terms.</p>
-
-        <a href="/" class="back-link">← Back to Homepage</a>
+      <a href="index.html" class="back-link">← Back to Home</a>
     </div>
-    
     <footer>
-        &copy; 2025 DualSpark Reader
+      <p>
+        © 2024 DualSpark. All rights reserved.
+        <a href="privacy.html">Privacy Policy</a>
+      </p>
     </footer>
-</body>
-</html> 
+  </body>
+</html>
