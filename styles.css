@@ -1,6 +1,6 @@
 /* Base styles */
 body {
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -8,7 +8,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
+    background-color: #fbf5ee;
     position: relative;
     overflow: hidden;
 }
@@ -22,7 +22,7 @@ body {
     background-repeat: repeat;
     background-position: center;
     background-size: contain;
-    opacity: 1.0;
+    opacity: 0.06;
     z-index: -1;
 }
 
@@ -39,57 +39,65 @@ body {
 h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    color: #ffffff;
-    font-weight: 700;
+    color: #2C1810;
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
 p {
     font-size: 1.1rem;
-    color: #cccccc;
+    color: #4A3830;
     line-height: 1.6;
     margin-bottom: 2rem;
+    font-weight: 400;
 }
 
 .feature {
-    font-weight: bold;
-    color: #ffffff;
+    font-weight: 500;
+    color: #8B4513;
 }
 
 .compatibility {
     font-size: 0.9rem;
-    color: #888888;
+    color: #6B4F45;
     margin-top: -1rem;
     margin-bottom: 2rem;
+    font-weight: 300;
 }
 
 /* Button styles */
 .install-btn {
-    background-color: #e0e0e0;
-    color: #333333;
+    background-color: #8B4513;
+    color: #FBF5EE;
     border: none;
     padding: 0.8rem 2rem;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: 400;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    display: inline-block;
 }
 
 .install-btn:hover {
-    background-color: #ffffff;
+    background-color: #6B4F45;
 }
 
 /* Footer */
 footer {
     margin-top: 3rem;
-    color: #666666;
+    color: #6B4F45;
     font-size: 0.8rem;
+    font-weight: 300;
 }
 
 footer a {
-    color: #666666;
+    color: #8B4513;
     text-decoration: none;
     transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #6B4F45;
 } 
