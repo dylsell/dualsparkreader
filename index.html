@@ -1,115 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DualSpark Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #000000;
-            position: relative;
-            overflow: hidden;
-        }
+      body {
+        font-family: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #000000;
+        position: relative;
+        overflow: hidden;
+      }
 
-        .background-icon {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('icons/icon-white.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            opacity: 0.08;
-            z-index: -1;
-        }
+      .background-icon {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("icons/icon-white.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        opacity: 0.08;
+        z-index: -1;
+      }
 
-        .content {
-            text-align: center;
-            z-index: 1;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-        }
+      .content {
+        text-align: center;
+        z-index: 1;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+      }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            font-weight: normal;
-        }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #ffffff;
+        font-weight: 700;
+      }
 
-        p {
-            font-size: 1.1rem;
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
+      p {
+        font-size: 1.1rem;
+        color: #cccccc;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
 
-        .feature {
-            font-weight: bold;
-            color: #ffffff;
-        }
+      .feature {
+        font-weight: bold;
+        color: #ffffff;
+      }
 
-        .compatibility {
-            font-size: 0.9rem;
-            color: #888888;
-            margin-top: -1rem;
-            margin-bottom: 2rem;
-        }
+      .compatibility {
+        font-size: 0.9rem;
+        color: #888888;
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+      }
 
-        .install-btn {
-            background-color: #e0e0e0;
-            color: #333333;
-            border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            font-weight: normal;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+      .install-btn {
+        background-color: #e0e0e0;
+        color: #333333;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        font-weight: normal;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-        .install-btn:hover {
-            background-color: #ffffff;
-        }
-        
-        footer {
-            margin-top: 3rem;
-            color: #666666;
-            font-size: 0.8rem;
-        }
+      .install-btn:hover {
+        background-color: #ffffff;
+      }
+
+      footer {
+        margin-top: 3rem;
+        color: #666666;
+        font-size: 0.8rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="background-icon"></div>
-    
+
     <div class="content">
-        <h1>DualSpark Reader</h1>
-        <p>Enhance your AI experience with <span class="feature">narrated AI responses</span> and an <span class="feature">immersive reading experience</span>.</p>
-        <p class="compatibility">Compatible with Claude and ChatGPT</p>
-        
-        <a href="#" id="install-button" class="install-btn">Install Extension</a>
+      <h1>DualSpark Reader</h1>
+      <p>
+        Enhance your AI experience with
+        <span class="feature">narrated AI responses</span> and an
+        <span class="feature">immersive reading experience</span>.
+      </p>
+      <p class="compatibility">Compatible with Claude and ChatGPT</p>
+
+      <a href="#" id="install-button" class="install-btn">Install Extension</a>
     </div>
-    
+
     <footer>
-        &copy; 2025 DualSpark Reader | <a href="/privacy.html" style="color: #666666; text-decoration: none; transition: color 0.3s ease;">Privacy Policy</a>
+      &copy; 2025 DualSpark Reader |
+      <a
+        href="/privacy.html"
+        style="
+          color: #666666;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        "
+        >Privacy Policy</a
+      >
     </footer>
 
     <script>
-        document.getElementById('install-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            // In a real implementation, this would redirect to the Chrome Web Store
-            alert('This would redirect to the Chrome Web Store where the extension can be installed.');
-            // Example: window.location.href = 'https://chrome.google.com/webstore/detail/your-extension-id';
+      document
+        .getElementById("install-button")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          // In a real implementation, this would redirect to the Chrome Web Store
+          alert(
+            "This would redirect to the Chrome Web Store where the extension can be installed."
+          );
+          // Example: window.location.href = 'https://chrome.google.com/webstore/detail/your-extension-id';
         });
     </script>
-</body>
-</html> 
+  </body>
+</html>
