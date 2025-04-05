@@ -3,36 +3,100 @@ body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fbf5ee;
+    background-color: #f6f0ea;
     position: relative;
-    overflow: hidden;
 }
 
-/* Background icon */
-.background-icon {
+/* Logo */
+.logo {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('icons/background.png');
-    background-repeat: repeat;
-    background-position: center;
-    background-size: contain;
-    opacity: 0.06;
-    z-index: -1;
+    top: 2rem;
+    right: 2rem;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    filter: invert(27%) sepia(33%) saturate(1000%) hue-rotate(-27deg) brightness(89%) contrast(100%);
 }
 
 /* Content area */
 .content {
     text-align: center;
     z-index: 1;
-    padding: 2rem;
+    padding: 8rem 2rem;
     max-width: 500px;
     width: 90%;
+    margin: auto;
+}
+
+/* Privacy page specific styles */
+.privacy-content {
+    text-align: left;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.privacy-content h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.privacy-content h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #2C1810;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(44, 24, 16, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.privacy-content h3 {
+    font-size: 1.2rem;
+    color: #4A3830;
+    font-weight: 500;
+    margin-top: 1.5rem;
+}
+
+.privacy-content p, 
+.privacy-content ul, 
+.privacy-content li {
+    color: #4A3830;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.privacy-content ul {
+    padding-left: 1.5rem;
+}
+
+.privacy-content li {
+    margin-bottom: 0.5rem;
+}
+
+.last-updated {
+    font-style: italic;
+    color: #6B4F45;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #8B4513;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    color: #6B4F45;
 }
 
 /* Typography */
@@ -62,7 +126,7 @@ p {
     font-size: 0.9rem;
     color: #6B4F45;
     margin-top: -1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     font-weight: 300;
 }
 
@@ -86,10 +150,12 @@ p {
 
 /* Footer */
 footer {
-    margin-top: 3rem;
+    margin-top: auto;
+    padding: 2rem;
     color: #6B4F45;
     font-size: 0.8rem;
     font-weight: 300;
+    text-align: center;
 }
 
 footer a {
